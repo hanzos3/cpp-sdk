@@ -1,5 +1,5 @@
-# MinIO C++ Library for Amazon S3 Compatible Cloud Storage
-# Copyright 2021-2024 MinIO, Inc.
+# Hanzo S3 C++ Library for Amazon S3 Compatible Cloud Storage
+# Copyright 2021-2024 Hanzo AI, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 cmake_minimum_required(VERSION 3.10)
 cmake_policy(SET CMP0091 NEW)
 
-# Minio C++ Project
+# Hanzo S3 C++ Project
 # -----------------
 
 set(MINIO_CPP_MAJOR_VERSION "0")
@@ -27,7 +27,7 @@ set(MINIO_CPP_PATCH_VERSION "0")
 set(MINIO_CPP_VERSION_STRING "${MINIO_CPP_MAJOR_VERSION}.${MINIO_CPP_MINOR_VERSION}.${MINIO_CPP_PATCH_VERSION}")
 
 project(miniocpp
-  DESCRIPTION "MinIO C++ Client SDK provides simple APIs to access S3 compatible object storage"
+  DESCRIPTION "Hanzo S3 C++ Client SDK provides simple APIs to access S3 compatible object storage"
   VERSION ${MINIO_CPP_VERSION_STRING}
   LANGUAGES C CXX
 )
@@ -77,7 +77,7 @@ if (WIN32)
   list(APPEND MINIO_CPP_LIBS ws2_32)
 endif()
 
-# Minio C++ Library
+# Hanzo S3 C++ Library
 # -----------------
 
 set(MINIO_CPP_SOURCES
@@ -140,7 +140,7 @@ set_target_properties(miniocpp PROPERTIES POSITION_INDEPENDENT_CODE ON)
 # Add a cmake alias - this is how users should use minio-cpp in their cmake projects.
 add_library(miniocpp::miniocpp ALIAS miniocpp)
 
-# Minio C++ Tests
+# Hanzo S3 C++ Tests
 # ---------------
 
 if (MINIO_CPP_TEST)
@@ -211,7 +211,7 @@ if (MINIO_CPP_TEST)
   target_link_libraries(tests miniocpp ${MINIO_CPP_LIBS})
 endif()
 
-# Minio C++ Documentation
+# Hanzo S3 C++ Documentation
 # -----------------------
 
 if (MINIO_CPP_MAKE_DOC)

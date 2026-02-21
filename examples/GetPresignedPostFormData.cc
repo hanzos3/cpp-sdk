@@ -1,5 +1,5 @@
-// MinIO C++ Library for Amazon S3 Compatible Cloud Storage
-// Copyright 2022-2024 MinIO, Inc.
+// Hanzo S3 C++ Library for Amazon S3 Compatible Cloud Storage
+// Copyright 2022-2024 Hanzo AI, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,11 +19,11 @@
 
 int main() {
   // Create S3 base URL.
-  minio::s3::BaseUrl base_url("play.min.io");
+  minio::s3::BaseUrl base_url("s3.hanzo.ai");
 
   // Create credential provider.
   minio::creds::StaticProvider provider(
-      "Q3AM3UQ867SPQQA43P2F", "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG");
+      "YOUR-ACCESS-KEY", "YOUR-SECRET-KEY");
 
   // Create S3 client.
   minio::s3::Client client(base_url, &provider);
@@ -45,7 +45,7 @@ int main() {
     for (auto& [key, value] : resp.form_data) fields += key + "=" + value + " ";
     fields += "-F file=@<FILE>";
     std::cout << "Example CURL command to use form-data:" << std::endl
-              << "curl -X POST https://play.min.io/my-bucket " << fields
+              << "curl -X POST https://s3.hanzo.ai/my-bucket " << fields
               << std::endl;
   } else {
     std::cout << "unable to get presigned post form data; "

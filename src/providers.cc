@@ -1,5 +1,5 @@
-// MinIO C++ Library for Amazon S3 Compatible Cloud Storage
-// Copyright 2022-2024 MinIO, Inc.
+// Hanzo S3 C++ Library for Amazon S3 Compatible Cloud Storage
+// Copyright 2022-2024 Hanzo AI, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -191,7 +191,7 @@ MinioClientConfigProvider::MinioClientConfigProvider(std::string filename,
 
   if (!aliases.contains(alias)) {
     this->creds_ = error::make<Credentials>(
-        "alias " + alias + " not found in MinIO client configuration file " +
+        "alias " + alias + " not found in Hanzo S3 client configuration file " +
         filename);
     return;
   }

@@ -21,10 +21,10 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-    - name: Checkout minio-cpp
+    - name: Checkout cpp-sdk
       uses: actions/checkout@v4
       with:
-        path: "minio-cpp"
+        path: "cpp-sdk"
 
     - name: "Python"
       uses: actions/setup-python@v5
@@ -38,10 +38,10 @@ jobs:
 
     - name: Version Check
       shell: bash
-      working-directory: minio-cpp
+      working-directory: cpp-sdk
       run: python check-version.py
 
     - name: Coding Style Check
       shell: bash
-      working-directory: minio-cpp
+      working-directory: cpp-sdk
       run: CLANG_FORMAT=clang-format-18 ./check-style.sh

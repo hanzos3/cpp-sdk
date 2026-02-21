@@ -1,8 +1,8 @@
 > NOTE: This project is work in progress.
 
-MinIO C++ SDK is Simple Storage Service (aka S3) client to perform bucket and object operations to any Amazon S3 compatible object storage service.
+Hanzo S3 C++ SDK is a Simple Storage Service (aka S3) client to perform bucket and object operations to any Amazon S3 compatible object storage service.
 
-For a complete list of APIs and examples, please take a look at the [MinIO C++ Client API Reference](https://minio-cpp.min.io/)
+For a complete list of APIs and examples, please take a look at the [Hanzo S3 C++ Client API Reference](https://cpp.s3.hanzo.ai/)
 
 ## Build requirements
 * A working C++ development environment supporting C++17 standards.
@@ -16,8 +16,8 @@ vcpkg install minio-cpp
 
 ## Building source
 ```
-$ git clone https://github.com/minio/minio-cpp
-$ cd minio-cpp
+$ git clone https://github.com/hanzos3/cpp-sdk
+$ cd cpp-sdk
 $ wget --quiet -O vcpkg-master.zip https://github.com/microsoft/vcpkg/archive/refs/heads/master.zip
 $ unzip -qq vcpkg-master.zip
 $ ./vcpkg-master/bootstrap-vcpkg.sh
@@ -33,11 +33,11 @@ $ cmake --build ./build --config Debug
 int main(int argc, char* argv[]) {
   // Create S3 base URL.
   minio::http::BaseUrl base_url;
-  base_url.SetHost("play.min.io");
+  base_url.SetHost("s3.hanzo.ai");
 
   // Create credential provider.
   minio::creds::StaticProvider provider(
-      "Q3AM3UQ867SPQQA43P2F", "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG");
+      "YOUR-ACCESS-KEY", "YOUR-SECRET-KEY");
 
   // Create S3 client.
   minio::s3::Client client(base_url, &provider);
@@ -94,4 +94,4 @@ int main(int argc, char* argv[]) {
 ```
 
 ## License
-This SDK is distributed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0), see [LICENSE](https://github.com/minio/minio-cpp/blob/master/LICENSE) for more information.
+This SDK is distributed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0), see [LICENSE](https://github.com/hanzos3/cpp-sdk/blob/main/LICENSE) for more information.

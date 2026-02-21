@@ -1,5 +1,5 @@
-// MinIO C++ Library for Amazon S3 Compatible Cloud Storage
-// Copyright 2022-2024 MinIO, Inc.
+// Hanzo S3 C++ Library for Amazon S3 Compatible Cloud Storage
+// Copyright 2022-2024 Hanzo AI, Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -71,7 +71,7 @@
 #endif
 
 #define DEFAULT_USER_AGENT                                       \
-  "MinIO (" MINIO_CPP_PLATFORM_STRING "; " MINIO_CPP_ARCH_STRING \
-  ") minio-cpp/" MINIO_CPP_VERSION ""
+  "HanzoS3 (" MINIO_CPP_PLATFORM_STRING "; " MINIO_CPP_ARCH_STRING \
+  ") hanzo-s3-cpp/" MINIO_CPP_VERSION ""
 
 #endif  // MINIO_CPP_CONFIG_H_INCLUDED

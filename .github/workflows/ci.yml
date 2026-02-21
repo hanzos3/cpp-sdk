@@ -1,4 +1,4 @@
-name: MinIO C++ Cmake
+name: Hanzo S3 C++ CMake
 
 on:
   push:
@@ -47,10 +47,10 @@ jobs:
     runs-on: ${{ matrix.config.os }}
 
     steps:
-    - name: Checkout minio-cpp
+    - name: Checkout cpp-sdk
       uses: actions/checkout@v4
       with:
-        path: "minio-cpp"
+        path: "cpp-sdk"
 
     - name: Checkout vcpkg
       uses: actions/checkout@v4
@@ -95,54 +95,54 @@ jobs:
       shell: bash
       run: |
         ./vcpkg/bootstrap-vcpkg.sh
-        cd minio-cpp
+        cd cpp-sdk
         ../vcpkg/vcpkg install
         cmake . -B ./build -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}} -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake -DMINIO_CPP_TEST:BOOL=ON
         cmake --build ./build --config ${{matrix.config.build_type}} -j 4
 
-    - name: Start MinIO server if Ubuntu
+    - name: Start Hanzo S3 server if Ubuntu
       if: startsWith(matrix.config.name, 'Ubuntu_Latest_GCC')
       run: |
         mkdir -p ~/.minio/certs
-        cp ./minio-cpp/tests/public.crt ./minio-cpp/tests/private.key ~/.minio/certs/
-        sudo cp ./minio-cpp/tests/public.crt /usr/local/share/ca-certificates/
+        cp ./cpp-sdk/tests/public.crt ./cpp-sdk/tests/private.key ~/.minio/certs/
+        sudo cp ./cpp-sdk/tests/public.crt /usr/local/share/ca-certificates/
         sudo update-ca-certificates
         MINIO_CI_CD=true ./minio server /tmp/test-xl/{1...4}/ &
         sleep 10
 
-    - name: Start MinIO server if macOS
+    - name: Start Hanzo S3 server if macOS
       if: startsWith(matrix.config.name, 'macos')
       run: |
         MINIO_CI_CD=true minio server test-xl/{1...4}/ &
         sleep 10
 
-    - name: Start MinIO server if Windows
+    - name: Start Hanzo S3 server if Windows
       if: startsWith(matrix.config.os, 'windows')
       shell: bash
       run: |
         mkdir -p ~/.minio/certs
-        cp ./minio-cpp/tests/public.crt ./minio-cpp/tests/private.key ~/.minio/certs/
-        certutil -addstore -f "ROOT" ./minio-cpp/tests/public.crt
+        cp ./cpp-sdk/tests/public.crt ./cpp-sdk/tests/private.key ~/.minio/certs/
+        certutil -addstore -f "ROOT" ./cpp-sdk/tests/public.crt
         MINIO_CI_CD=true ./minio.exe server test-xl/{1...4}/ &
         sleep 10
 
     - name: Run tests if Ubuntu
       if: startsWith(matrix.config.name, 'Ubuntu_Latest_GCC')
       run: |
-        SERVER_ENDPOINT=localhost:9000 ACCESS_KEY=minioadmin SECRET_KEY=minioadmin ENABLE_HTTPS=1 ./minio-cpp/build/tests
+        SERVER_ENDPOINT=localhost:9000 ACCESS_KEY=minioadmin SECRET_KEY=minioadmin ENABLE_HTTPS=1 ./cpp-sdk/build/tests
 
     - name: Run tests if macOS
       if: startsWith(matrix.config.name, 'macos')
       run: |
-        SERVER_ENDPOINT=localhost:9000 ACCESS_KEY=minioadmin SECRET_KEY=minioadmin ./minio-cpp/build/tests
+        SERVER_ENDPOINT=localhost:9000 ACCESS_KEY=minioadmin SECRET_KEY=minioadmin ./cpp-sdk/build/tests
 
     - name: Run tests if Windows
       shell: bash
       if: startsWith(matrix.config.os, 'windows')
       run: |
-        SERVER_ENDPOINT=localhost:9000 ACCESS_KEY=minioadmin SECRET_KEY=minioadmin ENABLE_HTTPS=1 ./minio-cpp/build/Release/tests.exe
+        SERVER_ENDPOINT=localhost:9000 ACCESS_KEY=minioadmin SECRET_KEY=minioadmin ENABLE_HTTPS=1 ./cpp-sdk/build/Release/tests.exe
 
     - name: Run CMake test
       run: |
-        cd minio-cpp/build
+        cd cpp-sdk/build
         ctest -C ${{ matrix.config.build_type }}
