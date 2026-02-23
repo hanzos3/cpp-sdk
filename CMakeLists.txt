@@ -137,7 +137,7 @@ target_link_libraries(miniocpp PUBLIC ${MINIO_CPP_LIBS})
 set_target_properties(miniocpp PROPERTIES VERSION "${MINIO_CPP_VERSION_STRING}")
 set_target_properties(miniocpp PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
-# Add a cmake alias - this is how users should use minio-cpp in their cmake projects.
+# Add a cmake alias - this is how users should use miniocpp in their cmake projects.
 add_library(miniocpp::miniocpp ALIAS miniocpp)
 
 # Hanzo S3 C++ Tests

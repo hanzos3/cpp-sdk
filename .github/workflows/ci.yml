@@ -70,6 +70,7 @@ jobs:
         echo 'deb http://apt.llvm.org/focal/ llvm-toolchain-focal-18 main' | sudo tee -a /etc/apt/sources.list
         sudo apt-get -qy update
         sudo apt-get -qy install cmake
+        # NOTE: Downloads upstream server binary for testing. URL and binary names cannot be changed.
         wget --quiet https://dl.min.io/server/minio/release/linux-amd64/minio
         chmod +x minio
         cmake --version
@@ -78,6 +79,7 @@ jobs:
     - name: Install dependencies if macOS
       if: startsWith(matrix.config.os, 'macos')
       run: |
+        # NOTE: Installs upstream server binary via Homebrew for testing.
         brew install pkg-config cmake minio/stable/minio
         cmake --version
         minio --version
@@ -87,6 +89,7 @@ jobs:
       if: startsWith(matrix.config.os, 'windows')
       run: |
         choco install -y --no-progress cmake wget
+        # NOTE: Downloads upstream server binary for testing. URL cannot be changed.
         wget --quiet https://dl.min.io/server/minio/release/windows-amd64/minio.exe
         chmod +x minio.exe
         cmake --version
@@ -107,12 +110,14 @@ jobs:
         cp ./cpp-sdk/tests/public.crt ./cpp-sdk/tests/private.key ~/.minio/certs/
         sudo cp ./cpp-sdk/tests/public.crt /usr/local/share/ca-certificates/
         sudo update-ca-certificates
+        # NOTE: MINIO_CI_CD env var is required by the upstream server binary and cannot be renamed.
         MINIO_CI_CD=true ./minio server /tmp/test-xl/{1...4}/ &
         sleep 10
 
     - name: Start Hanzo S3 server if macOS
       if: startsWith(matrix.config.name, 'macos')
       run: |
+        # NOTE: MINIO_CI_CD env var is required by the upstream server binary and cannot be renamed.
         MINIO_CI_CD=true minio server test-xl/{1...4}/ &
         sleep 10
 
@@ -123,6 +128,7 @@ jobs:
         mkdir -p ~/.minio/certs
         cp ./cpp-sdk/tests/public.crt ./cpp-sdk/tests/private.key ~/.minio/certs/
         certutil -addstore -f "ROOT" ./cpp-sdk/tests/public.crt
+        # NOTE: MINIO_CI_CD env var is required by the upstream server binary and cannot be renamed.
         MINIO_CI_CD=true ./minio.exe server test-xl/{1...4}/ &
         sleep 10
 
