@@ -70,8 +70,8 @@ jobs:
         echo 'deb http://apt.llvm.org/focal/ llvm-toolchain-focal-18 main' | sudo tee -a /etc/apt/sources.list
         sudo apt-get -qy update
         sudo apt-get -qy install cmake
-        # NOTE: Downloads upstream server binary for testing. URL and binary names cannot be changed.
-        wget --quiet https://dl.min.io/server/minio/release/linux-amd64/minio
+        # Downloads Hanzo S3 server binary for testing.
+        wget --quiet -O minio https://github.com/hanzoai/s3/releases/latest/download/s3-linux-amd64
         chmod +x minio
         cmake --version
         ./minio --version
@@ -89,8 +89,8 @@ jobs:
       if: startsWith(matrix.config.os, 'windows')
       run: |
         choco install -y --no-progress cmake wget
-        # NOTE: Downloads upstream server binary for testing. URL cannot be changed.
-        wget --quiet https://dl.min.io/server/minio/release/windows-amd64/minio.exe
+        # Downloads Hanzo S3 server binary for testing.
+        wget --quiet -O minio.exe https://github.com/hanzoai/s3/releases/latest/download/s3-windows-amd64.exe
         chmod +x minio.exe
         cmake --version
 
