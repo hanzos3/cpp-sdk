@@ -15,8 +15,8 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef MINIO_CPP_BASECLIENT_H_INCLUDED
-#define MINIO_CPP_BASECLIENT_H_INCLUDED
+#ifndef S3_CPP_BASECLIENT_H_INCLUDED
+#define S3_CPP_BASECLIENT_H_INCLUDED
 
 #include <map>
 #include <string>
@@ -34,7 +34,7 @@
 #if defined(_WIN32) && defined(GetObject)
 #pragma push_macro("GetObject")
 #undef GetObject
-#define MINIO_CPP_GET_OBJECT_DEFINED
+#define S3_CPP_GET_OBJECT_DEFINED
 #endif
 
 namespace minio::s3 {
@@ -178,9 +178,9 @@ class BaseClient {
 
 }  // namespace minio::s3
 
-#if defined(_WIN32) && defined(MINIO_CPP_GET_OBJECT_DEFINED)
-#undef MINIO_CPP_GET_OBJECT_DEFINED
+#if defined(_WIN32) && defined(S3_CPP_GET_OBJECT_DEFINED)
+#undef S3_CPP_GET_OBJECT_DEFINED
 #pragma pop_macro("GetObject")
 #endif
 
-#endif  // MINIO_CPP_BASECLIENT_H_INCLUDED
+#endif  // S3_CPP_BASECLIENT_H_INCLUDED

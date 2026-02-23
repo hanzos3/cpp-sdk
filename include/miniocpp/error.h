@@ -15,8 +15,8 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef MINIO_CPP_ERROR_H_INCLUDED
-#define MINIO_CPP_ERROR_H_INCLUDED
+#ifndef S3_CPP_ERROR_H_INCLUDED
+#define S3_CPP_ERROR_H_INCLUDED
 
 #include <ostream>
 #include <string>
@@ -58,4 +58,4 @@ inline T_RESULT make(TA&&... args) {
 
 }  // namespace minio::error
 
-#endif  // MINIO_CPP_ERROR_H_INCLUDED
+#endif  // S3_CPP_ERROR_H_INCLUDED

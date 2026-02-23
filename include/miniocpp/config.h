@@ -15,63 +15,63 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef MINIO_CPP_CONFIG_H_INCLUDED
-#define MINIO_CPP_CONFIG_H_INCLUDED
+#ifndef S3_CPP_CONFIG_H_INCLUDED
+#define S3_CPP_CONFIG_H_INCLUDED
 
-#define MINIO_CPP_STRINGIFY(x) #x
-#define MINIO_CPP_TO_STRING(x) MINIO_CPP_STRINGIFY(x)
+#define S3_CPP_STRINGIFY(x) #x
+#define S3_CPP_TO_STRING(x) S3_CPP_STRINGIFY(x)
 
-#define MINIO_CPP_MAJOR_VERSION 0
-#define MINIO_CPP_MINOR_VERSION 3
-#define MINIO_CPP_PATCH_VERSION 0
+#define S3_CPP_MAJOR_VERSION 0
+#define S3_CPP_MINOR_VERSION 3
+#define S3_CPP_PATCH_VERSION 0
 
-#define MINIO_CPP_VERSION                                                  \
-  "" MINIO_CPP_TO_STRING(MINIO_CPP_MAJOR_VERSION) "." MINIO_CPP_TO_STRING( \
-      MINIO_CPP_MINOR_VERSION) "." MINIO_CPP_TO_STRING(MINIO_CPP_PATCH_VERSION)
+#define S3_CPP_VERSION                                                  \
+  "" S3_CPP_TO_STRING(S3_CPP_MAJOR_VERSION) "." S3_CPP_TO_STRING( \
+      S3_CPP_MINOR_VERSION) "." S3_CPP_TO_STRING(S3_CPP_PATCH_VERSION)
 
 #if defined(_M_X64) || defined(__x86_64__)
-#define MINIO_CPP_ARCH_STRING "x86_64"
+#define S3_CPP_ARCH_STRING "x86_64"
 #elif defined(_M_IX86) || defined(__X86__) || defined(__i386__)
-#define MINIO_CPP_ARCH_STRING "x86"
+#define S3_CPP_ARCH_STRING "x86"
 #elif defined(_M_ARM64) || defined(__arm64__) || defined(__aarch64__)
-#define MINIO_CPP_ARCH_STRING "arm64"
+#define S3_CPP_ARCH_STRING "arm64"
 #elif defined(_M_ARM) || defined(_M_ARMT) || defined(__arm__) || \
     defined(__thumb__) || defined(__thumb2__)
-#define MINIO_CPP_ARCH_STRING "arm32"
+#define S3_CPP_ARCH_STRING "arm32"
 #elif defined(_MIPS_ARCH_MIPS64) || defined(__mips64)
-#define MINIO_CPP_ARCH_STRING "mips64"
+#define S3_CPP_ARCH_STRING "mips64"
 #elif defined(_MIPS_ARCH_MIPS32) || defined(_M_MRX000) || defined(__mips__)
-#define MINIO_CPP_ARCH_STRING "mips32"
+#define S3_CPP_ARCH_STRING "mips32"
 #elif (defined(__riscv) || defined(__riscv__)) && defined(__riscv_xlen)
-#define MINIO_CPP_ARCH_STRING "riscv" MINIO_CPP_STRINGIFY(__riscv_xlen)
+#define S3_CPP_ARCH_STRING "riscv" S3_CPP_STRINGIFY(__riscv_xlen)
 #elif defined(__loongarch__)
-#define MINIO_CPP_ARCH_STRING "loongarch"
+#define S3_CPP_ARCH_STRING "loongarch"
 #elif defined(__s390__) || defined(__s390x__)
-#define MINIO_CPP_ARCH_STRING "s390"
+#define S3_CPP_ARCH_STRING "s390"
 #else
-#define MINIO_CPP_ARCH_STRING "unknown-arch"
+#define S3_CPP_ARCH_STRING "unknown-arch"
 #endif
 
 #if defined(_WIN32) || defined(__CYGWIN__)
-#define MINIO_CPP_PLATFORM_STRING "windows"
+#define S3_CPP_PLATFORM_STRING "windows"
 #elif defined(__ANDROID__)
-#define MINIO_CPP_PLATFORM_STRING "android"
+#define S3_CPP_PLATFORM_STRING "android"
 #elif defined(__linux__) || defined(__linux)
-#define MINIO_CPP_PLATFORM_STRING "linux"
+#define S3_CPP_PLATFORM_STRING "linux"
 #elif defined(__APPLE__) || defined(__MACH__)
-#define MINIO_CPP_PLATFORM_STRING "darwin"
+#define S3_CPP_PLATFORM_STRING "darwin"
 #elif defined(__FreeBSD__)
-#define MINIO_CPP_PLATFORM_STRING "freebsd"
+#define S3_CPP_PLATFORM_STRING "freebsd"
 #elif defined(__NetBSD__)
-#define MINIO_CPP_PLATFORM_STRING "netbsd"
+#define S3_CPP_PLATFORM_STRING "netbsd"
 #elif defined(__OpenBSD__)
-#define MINIO_CPP_PLATFORM_STRING "openbsd"
+#define S3_CPP_PLATFORM_STRING "openbsd"
 #else
-#define MINIO_CPP_PLATFORM_STRING "unknown-os"
+#define S3_CPP_PLATFORM_STRING "unknown-os"
 #endif
 
 #define DEFAULT_USER_AGENT                                       \
-  "HanzoS3 (" MINIO_CPP_PLATFORM_STRING "; " MINIO_CPP_ARCH_STRING \
-  ") hanzo-s3-cpp/" MINIO_CPP_VERSION ""
+  "HanzoS3 (" S3_CPP_PLATFORM_STRING "; " S3_CPP_ARCH_STRING \
+  ") hanzo-s3-cpp/" S3_CPP_VERSION ""
 
-#endif  // MINIO_CPP_CONFIG_H_INCLUDED
+#endif  // S3_CPP_CONFIG_H_INCLUDED

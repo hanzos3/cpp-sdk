@@ -100,7 +100,7 @@ jobs:
         ./vcpkg/bootstrap-vcpkg.sh
         cd cpp-sdk
         ../vcpkg/vcpkg install
-        cmake . -B ./build -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}} -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake -DMINIO_CPP_TEST:BOOL=ON
+        cmake . -B ./build -DCMAKE_BUILD_TYPE=${{matrix.config.build_type}} -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake -DS3_CPP_TEST:BOOL=ON
         cmake --build ./build --config ${{matrix.config.build_type}} -j 4
 
     - name: Start Hanzo S3 server if Ubuntu
@@ -110,15 +110,15 @@ jobs:
         cp ./cpp-sdk/tests/public.crt ./cpp-sdk/tests/private.key ~/.minio/certs/
         sudo cp ./cpp-sdk/tests/public.crt /usr/local/share/ca-certificates/
         sudo update-ca-certificates
-        # NOTE: MINIO_CI_CD env var is required by the upstream server binary and cannot be renamed.
-        MINIO_CI_CD=true ./minio server /tmp/test-xl/{1...4}/ &
+        # S3_CI_CD env var for Hanzo S3 server CI mode.
+        S3_CI_CD=true ./minio server /tmp/test-xl/{1...4}/ &
         sleep 10
 
     - name: Start Hanzo S3 server if macOS
       if: startsWith(matrix.config.name, 'macos')
       run: |
-        # NOTE: MINIO_CI_CD env var is required by the upstream server binary and cannot be renamed.
-        MINIO_CI_CD=true minio server test-xl/{1...4}/ &
+        # S3_CI_CD env var for Hanzo S3 server CI mode.
+        S3_CI_CD=true minio server test-xl/{1...4}/ &
         sleep 10
 
     - name: Start Hanzo S3 server if Windows
@@ -128,8 +128,8 @@ jobs:
         mkdir -p ~/.minio/certs
         cp ./cpp-sdk/tests/public.crt ./cpp-sdk/tests/private.key ~/.minio/certs/
         certutil -addstore -f "ROOT" ./cpp-sdk/tests/public.crt
-        # NOTE: MINIO_CI_CD env var is required by the upstream server binary and cannot be renamed.
-        MINIO_CI_CD=true ./minio.exe server test-xl/{1...4}/ &
+        # S3_CI_CD env var for Hanzo S3 server CI mode.
+        S3_CI_CD=true ./minio.exe server test-xl/{1...4}/ &
         sleep 10
 
     - name: Run tests if Ubuntu

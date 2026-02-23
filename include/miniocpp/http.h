@@ -15,8 +15,8 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef MINIO_CPP_HTTP_H_INCLUDED
-#define MINIO_CPP_HTTP_H_INCLUDED
+#ifndef S3_CPP_HTTP_H_INCLUDED
+#define S3_CPP_HTTP_H_INCLUDED
 
 #include <curlpp/Easy.hpp>
 #include <curlpp/Multi.hpp>
@@ -164,4 +164,4 @@ struct Response {
 
 }  // namespace minio::http
 
-#endif  // MINIO_CPP_HTTP_H_INCLUDED
+#endif  // S3_CPP_HTTP_H_INCLUDED

@@ -21,14 +21,14 @@ cmake_policy(SET CMP0091 NEW)
 # Hanzo S3 C++ Project
 # -----------------
 
-set(MINIO_CPP_MAJOR_VERSION "0")
-set(MINIO_CPP_MINOR_VERSION "3")
-set(MINIO_CPP_PATCH_VERSION "0")
-set(MINIO_CPP_VERSION_STRING "${MINIO_CPP_MAJOR_VERSION}.${MINIO_CPP_MINOR_VERSION}.${MINIO_CPP_PATCH_VERSION}")
+set(S3_CPP_MAJOR_VERSION "0")
+set(S3_CPP_MINOR_VERSION "3")
+set(S3_CPP_PATCH_VERSION "0")
+set(S3_CPP_VERSION_STRING "${S3_CPP_MAJOR_VERSION}.${S3_CPP_MINOR_VERSION}.${S3_CPP_PATCH_VERSION}")
 
 project(miniocpp
   DESCRIPTION "Hanzo S3 C++ Client SDK provides simple APIs to access S3 compatible object storage"
-  VERSION ${MINIO_CPP_VERSION_STRING}
+  VERSION ${S3_CPP_VERSION_STRING}
   LANGUAGES C CXX
 )
 
@@ -36,20 +36,20 @@ include(GNUInstallDirs)
 include(CheckIncludeFiles)
 include(CMakePackageConfigHelpers)
 
-option(MINIO_CPP_TEST "Build tests" OFF)
-option(MINIO_CPP_MAKE_DOC "Build documentation" OFF)
+option(S3_CPP_TEST "Build tests" OFF)
+option(S3_CPP_MAKE_DOC "Build documentation" OFF)
 
-set(MINIO_CPP_CFLAGS)
-set(MINIO_CPP_LIBS)
-set(MINIO_CPP_STD "17")
+set(S3_CPP_CFLAGS)
+set(S3_CPP_LIBS)
+set(S3_CPP_STD "17")
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "MSVC" OR "x${CMAKE_CXX_COMPILER_FRONTEND_VARIANT}" STREQUAL "xMSVC")
   # MSVC
 else()
   # GCC/Clang/AppleClang/...
-  LIST(APPEND MINIO_CPP_CFLAGS -Wall -Wextra -Wconversion)
+  LIST(APPEND S3_CPP_CFLAGS -Wall -Wextra -Wconversion)
   if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 8.0 AND CMAKE_CXX_COMPILER_VERSION VERSION_LESS 9.0 AND NOT MINGW)
-    list(APPEND MINIO_CPP_LIBS stdc++fs)
+    list(APPEND S3_CPP_LIBS stdc++fs)
   endif()
 endif()
 
@@ -63,7 +63,7 @@ find_package(nlohmann_json CONFIG REQUIRED)
 find_package(pugixml CONFIG REQUIRED)
 find_package(ZLIB REQUIRED)
 
-list(APPEND MINIO_CPP_LIBS
+list(APPEND S3_CPP_LIBS
   unofficial::curlpp::curlpp
   unofficial::inih::inireader
   nlohmann_json::nlohmann_json
@@ -73,14 +73,14 @@ list(APPEND MINIO_CPP_LIBS
 )
 
 if (WIN32)
-  list(APPEND MINIO_CPP_LIBS wsock32)
-  list(APPEND MINIO_CPP_LIBS ws2_32)
+  list(APPEND S3_CPP_LIBS wsock32)
+  list(APPEND S3_CPP_LIBS ws2_32)
 endif()
 
 # Hanzo S3 C++ Library
 # -----------------
 
-set(MINIO_CPP_SOURCES
+set(S3_CPP_SOURCES
   src/args.cc
   src/baseclient.cc
   src/client.cc
@@ -97,7 +97,7 @@ set(MINIO_CPP_SOURCES
   src/utils.cc
 )
 
-set(MINIO_CPP_HEADERS
+set(S3_CPP_HEADERS
   include/miniocpp/args.h
   include/miniocpp/baseclient.h
   include/miniocpp/client.h
@@ -121,20 +121,20 @@ IF (BUILD_SHARED_LIBS)
   IF (WIN32)
     message(FATAL_ERROR "Unable to build shared library on Windows yet, this library lacks decorator support.")
   ELSE ()
-    add_library(miniocpp SHARED ${MINIO_CPP_SOURCES} ${MINIO_CPP_HEADERS})
+    add_library(miniocpp SHARED ${S3_CPP_SOURCES} ${S3_CPP_HEADERS})
   ENDIF ()
 ELSE ()
-  add_library(miniocpp STATIC ${MINIO_CPP_SOURCES} ${MINIO_CPP_HEADERS})
+  add_library(miniocpp STATIC ${S3_CPP_SOURCES} ${S3_CPP_HEADERS})
 ENDIF ()
 
-target_compile_options(miniocpp PRIVATE ${MINIO_CPP_CFLAGS})
-target_compile_features(miniocpp PUBLIC cxx_std_${MINIO_CPP_STD})
+target_compile_options(miniocpp PRIVATE ${S3_CPP_CFLAGS})
+target_compile_features(miniocpp PUBLIC cxx_std_${S3_CPP_STD})
 target_include_directories(miniocpp PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/include>
   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
 )
-target_link_libraries(miniocpp PUBLIC ${MINIO_CPP_LIBS})
-set_target_properties(miniocpp PROPERTIES VERSION "${MINIO_CPP_VERSION_STRING}")
+target_link_libraries(miniocpp PUBLIC ${S3_CPP_LIBS})
+set_target_properties(miniocpp PROPERTIES VERSION "${S3_CPP_VERSION_STRING}")
 set_target_properties(miniocpp PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 # Add a cmake alias - this is how users should use miniocpp in their cmake projects.
@@ -143,7 +143,7 @@ add_library(miniocpp::miniocpp ALIAS miniocpp)
 # Hanzo S3 C++ Tests
 # ---------------
 
-if (MINIO_CPP_TEST)
+if (S3_CPP_TEST)
   set(EXAMPLE_APPS
     MakeBucket
     RemoveBucket
@@ -200,21 +200,21 @@ if (MINIO_CPP_TEST)
 
   foreach(target ${EXAMPLE_APPS})
     add_executable(${target} examples/${target}.cc)
-    target_compile_features(${target} PUBLIC cxx_std_${MINIO_CPP_STD})
+    target_compile_features(${target} PUBLIC cxx_std_${S3_CPP_STD})
     target_include_directories(${target} PRIVATE ${CMAKE_CURRENT_LIST_DIR}/include)
-    target_link_libraries(${target} PRIVATE miniocpp::miniocpp ${MINIO_CPP_LIBS})
+    target_link_libraries(${target} PRIVATE miniocpp::miniocpp ${S3_CPP_LIBS})
   endforeach()
 
   add_executable(tests tests/tests.cc)
-  target_compile_features(tests PUBLIC cxx_std_${MINIO_CPP_STD})
+  target_compile_features(tests PUBLIC cxx_std_${S3_CPP_STD})
   target_include_directories(tests PRIVATE ${CMAKE_CURRENT_LIST_DIR}/include)
-  target_link_libraries(tests miniocpp ${MINIO_CPP_LIBS})
+  target_link_libraries(tests miniocpp ${S3_CPP_LIBS})
 endif()
 
 # Hanzo S3 C++ Documentation
 # -----------------------
 
-if (MINIO_CPP_MAKE_DOC)
+if (S3_CPP_MAKE_DOC)
   # check if Doxygen is installed
   find_package(Doxygen)
   if (DOXYGEN_FOUND)
@@ -264,7 +264,7 @@ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/miniocpp-config.cmake"
         DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/miniocpp")
 
 install(FILES
-        ${MINIO_CPP_HEADERS} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/miniocpp")
+        ${S3_CPP_HEADERS} DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/miniocpp")
 
 configure_file(miniocpp.pc.in ${CMAKE_CURRENT_BINARY_DIR}/miniocpp.pc @ONLY)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/miniocpp.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)

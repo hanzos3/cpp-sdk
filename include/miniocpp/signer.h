@@ -15,8 +15,8 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef MINIO_CPP_SIGNER_H_INCLUDED
-#define MINIO_CPP_SIGNER_H_INCLUDED
+#ifndef S3_CPP_SIGNER_H_INCLUDED
+#define S3_CPP_SIGNER_H_INCLUDED
 
 #include <string>
 
@@ -80,4 +80,4 @@ std::string PostPresignV4(const std::string& data,
 
 }  // namespace minio::signer
 
-#endif  // MINIO_CPP_SIGNER_H_INCLUDED
+#endif  // S3_CPP_SIGNER_H_INCLUDED

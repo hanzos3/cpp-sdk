@@ -15,8 +15,8 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef MINIO_CPP_CREDENTIALS_H_INCLUDED
-#define MINIO_CPP_CREDENTIALS_H_INCLUDED
+#ifndef S3_CPP_CREDENTIALS_H_INCLUDED
+#define S3_CPP_CREDENTIALS_H_INCLUDED
 
 #include <string>
 #include <type_traits>
@@ -77,4 +77,4 @@ struct Credentials {
 
 }  // namespace minio::creds
 
-#endif  // MINIO_CPP_CREDENTIALS_H_INCLUDED
+#endif  // S3_CPP_CREDENTIALS_H_INCLUDED

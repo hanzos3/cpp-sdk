@@ -15,8 +15,8 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef MINIO_CPP_PROVIDERS_H_INCLUDED
-#define MINIO_CPP_PROVIDERS_H_INCLUDED
+#ifndef S3_CPP_PROVIDERS_H_INCLUDED
+#define S3_CPP_PROVIDERS_H_INCLUDED
 
 #include <functional>
 #include <list>
@@ -256,4 +256,4 @@ struct CertificateIdentityProvider : public Provider {
 
 }  // namespace minio::creds
 
-#endif  // MINIO_CPP_PROVIDERS_H_INCLUDED
+#endif  // S3_CPP_PROVIDERS_H_INCLUDED

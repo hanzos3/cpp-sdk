@@ -15,8 +15,8 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef MINIO_CPP_CLIENT_H_INCLUDED
-#define MINIO_CPP_CLIENT_H_INCLUDED
+#ifndef S3_CPP_CLIENT_H_INCLUDED
+#define S3_CPP_CLIENT_H_INCLUDED
 
 #include <list>
 #include <string>
@@ -126,4 +126,4 @@ class Client : public BaseClient {
 
 }  // namespace minio::s3
 
-#endif  // MINIO_CPP_CLIENT_H_INCLUDED
+#endif  // S3_CPP_CLIENT_H_INCLUDED

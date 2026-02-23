@@ -15,8 +15,8 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef MINIO_CPP_UTILS_H_INCLUDED
-#define MINIO_CPP_UTILS_H_INCLUDED
+#ifndef S3_CPP_UTILS_H_INCLUDED
+#define S3_CPP_UTILS_H_INCLUDED
 
 #include <stdint.h>
 
@@ -234,4 +234,4 @@ struct CharBuffer : std::streambuf {
 
 }  // namespace minio::utils
 
-#endif  // MINIO_CPP_UTILS_H_INCLUDED
+#endif  // S3_CPP_UTILS_H_INCLUDED

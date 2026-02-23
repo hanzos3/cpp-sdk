@@ -63,7 +63,7 @@ In order to run tests and examples, you can do the following assuming `VCPKG_ROO
 $ git clone https://github.com/hanzos3/cpp-sdk
 $ cd cpp-sdk
 $ ${VCPKG_ROOT}/vcpkg install
-$ cmake . -B build/Debug -DCMAKE_BUILD_TYPE=Debug -DMINIO_CPP_TEST=ON -DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake
+$ cmake . -B build/Debug -DCMAKE_BUILD_TYPE=Debug -DS3_CPP_TEST=ON -DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake
 $ cmake --build ./build/Debug
 ```
 
@@ -73,7 +73,7 @@ Note that cmake also supports multi-configuration generators. Multi-configuratio
 $ git clone https://github.com/hanzos3/cpp-sdk
 $ cd cpp-sdk
 $ ${VCPKG_ROOT}/vcpkg install
-$ cmake . -B build -DMINIO_CPP_TEST=ON -DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake
+$ cmake . -B build -DS3_CPP_TEST=ON -DCMAKE_TOOLCHAIN_FILE=${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake
 $ cmake --build ./build --config Debug
 ```
 
@@ -85,7 +85,7 @@ $ cd cpp-sdk
 $ git clone https://github.com/microsoft/vcpkg.git
 $ ./vcpkg/bootstrap-vcpkg.sh
 $ ./vcpkg/vcpkg install
-$ cmake . -B ./build/Debug -DCMAKE_BUILD_TYPE=Debug -DMINIO_CPP_TEST=ON -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
+$ cmake . -B ./build/Debug -DCMAKE_BUILD_TYPE=Debug -DS3_CPP_TEST=ON -DCMAKE_TOOLCHAIN_FILE=./vcpkg/scripts/buildsystems/vcpkg.cmake
 $ cmake --build ./build/Debug
 ```
 
@@ -94,7 +94,7 @@ We recommend the setup with `VCPKG_ROOT` for development. In that case there is 
 ```bash
 $ git clone https://github.com/hanzos3/cpp-sdk
 $ cd cpp-sdk
-$ ./configure.sh -DMINIO_CPP_TEST=ON
+$ ./configure.sh -DS3_CPP_TEST=ON
 ```
 
 ## Example:: file-uploader.cc

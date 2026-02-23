@@ -15,8 +15,8 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-#ifndef MINIO_CPP_ARGS_H_INCLUDED
-#define MINIO_CPP_ARGS_H_INCLUDED
+#ifndef S3_CPP_ARGS_H_INCLUDED
+#define S3_CPP_ARGS_H_INCLUDED
 
 #include <functional>
 #include <list>
@@ -603,4 +603,4 @@ struct PostPolicy {
 
 }  // namespace minio::s3
 
-#endif  // _MINIO_CPP_ARGS_H_INCLUDED
+#endif  // _S3_CPP_ARGS_H_INCLUDED
